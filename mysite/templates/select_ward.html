@@ -1,0 +1,11 @@
+<!-- templates/select_ward.html -->
+<form method="post">
+    {% csrf_token %}
+    <label for="ward">Select Ward:</label>
+    <select name="ward" required>
+        {% for ward in wards %}
+            <option value="{{ ward.id }}">{{ ward.name }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Select</button>
+</form>

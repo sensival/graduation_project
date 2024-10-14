@@ -1,0 +1,7 @@
+<!-- templates/patient_list.html -->
+<h2>Patient List</h2>
+<ul>
+    {% for patient in patients %}
+        <li><a href="{% url 'gallery:upload_photo' patient.id %}">{{ patient.name }}</a></li>
+    {% endfor %}
+</ul>

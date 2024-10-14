@@ -1,0 +1,11 @@
+<!-- templates/patient_photos.html -->
+<h2>Photos of {{ patient.name }}</h2>
+<ul>
+    {% for photo in photos %}
+        <li>
+            <img src="{{ photo.photo.url }}" alt="Photo">
+            <p>Uploaded at: {{ photo.upload_time }}</p>
+            <p>Memo: {{ photo.memo }}</p>
+        </li>
+    {% endfor %}
+</ul>
