@@ -1,14 +1,14 @@
 
 from django.urls import path
 from django.contrib.auth.views import LoginView
-from .views import CustomLoginAPI, SignUpAPI, WardListAPI, PatientListAPI, PatientPhotosAPI
+from .views import CustomLoginView, signup_view, WardListAPI, PatientListAPI, PatientPhotosAPI
 
 app_name = 'gallery'
 
 
 urlpatterns = [
-    path('api/login/', CustomLoginAPI.as_view(), name='api_login'),
-    path('api/signup/', SignUpAPI.as_view(), name='api_signup'),
+    path('signup/', signup_view, name='signup'),  # 회원가입 페이지
+    path('login/', CustomLoginView.as_view(), name='login'),  # 로그인 페이지
     path('api/wards/', WardListAPI.as_view(), name='api_ward_list'),
     path('api/patients/', PatientListAPI.as_view(), name='api_patient_list'),
     path('api/patients/<int:patient_id>/photos/', PatientPhotosAPI.as_view(), name='api_patient_photos'),
@@ -16,6 +16,8 @@ urlpatterns = [
 
 
 '''
+    path('api/login/', CustomLoginAPI.as_view(), name='api_login'),
+    path('api/signup/', SignUpAPI.as_view(), name='api_signup'),
     path('signup/', signup_view, name='signup'),  # 회원가입 페이지
     path('login/', CustomLoginView.as_view(), name='login'),  # 로그인 페이지
     path('select_ward/', select_ward, name='select_ward'),  # 병동 선택 페이지

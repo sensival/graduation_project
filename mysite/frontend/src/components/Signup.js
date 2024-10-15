@@ -4,60 +4,73 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { REACT_APP_HOST_IP_ADDRESS } from '../env';
 
-const Signup = () => {
+const SignUp = () => {
     const [username, setUsername] = useState('');
-    const [password1, setPassword1] = useState('');
-    const [password2, setPassword2] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState(''); // 비밀번호 확인 상태
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
-    const handleSignup = async (e) => {
+    const handleSignUp = async (e) => {
         e.preventDefault();
+        if (password !== confirmPassword) {
+            setError('비밀번호가 일치하지 않습니다.'); // 비밀번호 불일치 오류 메시지
+            return;
+        }
+        
         try {
-            const response = await axios.post(`${REACT_APP_HOST_IP_ADDRESS}gallery/api/signup/`, {
+            const response = await axios.post(`${ REACT_APP_HOST_IP_ADDRESS }gallery/api/signup/`, {
                 username,
-                password1,
-                password2,
+                email,
+                password,
             });
             if (response.status === 201) {
-                alert('Signup successful!');
-                navigate('/login'); // Redirect to home or login page
+                alert('회원가입이 성공적으로 완료되었습니다!');
+                navigate('/login'); // 회원가입 후 로그인 페이지로 리디렉션
             }
         } catch (error) {
-            setError(error.response.data);
+            setError(error.response ? error.response.data.detail : '회원가입 실패');
         }
     };
 
     return (
         <div>
-            <h2>Sign Up</h2>
-            <form onSubmit={handleSignup}>
-                <label>Username:</label>
+            <h2>회원가입</h2>
+            <form onSubmit={handleSignUp}>
+                <label>사용자 이름:</label>
                 <input
                     type="text"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
                 />
-                <label>Password:</label>
+                <label>이메일:</label>
                 <input
-                    type="password"
-                    value={password1}
-                    onChange={(e) => setPassword1(e.target.value)}
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required
                 />
-                <label>Confirm Password:</label>
+                <label>비밀번호:</label>
                 <input
                     type="password"
-                    value={password2}
-                    onChange={(e) => setPassword2(e.target.value)}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit">Sign Up</button>
-                {error && <p>{error}</p>}
+                <label>비밀번호 확인:</label>
+                <input
+                    type="password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                />
+                <button type="submit">회원가입</button>
+                {error && <p style={{ color: 'red' }}>{error}</p>}
             </form>
         </div>
     );
 };
 
-export default Signup;
+export default SignUp;

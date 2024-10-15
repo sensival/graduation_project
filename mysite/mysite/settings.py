@@ -128,5 +128,11 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-LOGIN_REDIRECT_URL = '/gallery/select_ward/'   # 로그인 후 병동 선택 페이지로 이동
+# LOGIN_REDIRECT_URL = '/gallery/select_ward/'   # 로그인 후 병동 선택 페이지로 이동
 
+# CORS 설정
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React 앱이 호스팅되는 주소
+]
+
+CORS_ALLOW_CREDENTIALS = True 

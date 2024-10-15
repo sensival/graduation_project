@@ -9,6 +9,31 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from rest_framework.permissions import AllowAny
 
+from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
+from .models import Patient, Ward
+from django.shortcuts import render, redirect
+from .models import Ward, Patient
+from .forms import SignUpForm
+from django.contrib.auth import login
+
+########### 로그인 ################
+class CustomLoginView(LoginView):
+    template_name = 'login.html'  # 로그인 페이지 템플릿 경로
+
+########### 가입 ################
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)  # 회원가입 후 자동 로그인
+            return redirect('http://localhost:3000/select_ward')  # 병동 선택 페이지로 이동
+    else:
+        form = SignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+
 # 로그인 API
 class CustomLoginAPI(APIView):
     permission_classes = [AllowAny] 

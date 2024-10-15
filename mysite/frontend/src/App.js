@@ -1,38 +1,28 @@
+// App.js
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Login from './components/Login';
-import SignUp from './components/Signup';
-import Ward from './components/Ward';
+import SelectWard from './components/Ward';
+import ExternalRedirect from './components/ExternalRedirect';
 
 function App() {
   return (
-    <div className="App">
-      <Router>
-        <Content />
-      </Router>
-    </div>
+    <Router>
+      <div className="App">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<SelectWard />} />
+          <Route path="/select-ward" element={<SelectWard />} />
+
+          {/* Django 서버의 로그인/회원가입 페이지로 리디렉트 */}
+          <Route path="/login" element={<ExternalRedirect url="http://localhost:8000/gallery/login/" />} />
+          <Route path="/signup" element={<ExternalRedirect url="http://localhost:8000/gallery/signup/" />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
-function Content() {
-  const location = useLocation();
-  
-  // 현재 경로가 '/login' 또는 '/signup'인지 확인
-  const isAuthPage = location.pathname === '/login' || location.pathname === '/signup';
-
-  return (
-    <>
-      {/* 인증 페이지가 아닐 때만 네비게이션 바 표시 */}
-      {!isAuthPage && <Navbar />}
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/select-ward" element={<Ward />} />
-        {/* Add more routes as needed */}
-      </Routes>
-    </>
-  );
-}
-
+//<Route path="/login" element={<Login />} />
+//<Route path="/signup" element={<SignUp />} />
 export default App;
