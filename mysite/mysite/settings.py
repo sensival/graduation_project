@@ -136,3 +136,10 @@ CORS_ALLOWED_ORIGINS = [
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
+
+ALLOWED_HOSTS = [
+    '192.168.0.5',  # 호스팅하는 컴퓨터의 IP 주소
+    'localhost',     # 로컬호스트
+    '127.0.0.1',     # 로컬호스트 IP
+    '*',              # 모든 호스트를 허용 (보안에 주의!)
+]
