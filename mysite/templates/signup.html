@@ -1,15 +1,126 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <style>
+        /* 기본 스타일 초기화 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 배경 및 중앙 정렬 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f2f5;
+        }
+
+        /* 회원가입 컨테이너 스타일 */
+        .signup-container {
+            width: 400px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        /* 제목 스타일 */
+        .signup-container h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        /* 입력 그룹 스타일 */
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+             margin-bottom: 20px; /* 입력 그룹 간격 설정 */
+        }
+
+        /* 레이블 스타일 */
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* 버튼 스타일 */
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* 링크 스타일 */
+        .login-link {
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        .ko_font {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
+
+        .helptext {
+            font-size: 12px; /* 글자 크기를 작게 설정 */
+            color: #999; /* 회색으로 설정 */
+            margin-top: 5px; /* 입력 필드와의 간격 */
+        }
+            </style>
 </head>
 <body>
-    <h2>회원가입</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">가입하기</button>
-    </form>
-    <p>이미 회원이신가요? <a href="{% url 'gallery:login' %}">로그인</a></p>
+    <div class="signup-container ko_font">
+        <h1>Wound Gallery</h1>
+        
+        <h3>회원가입</h3>
+        
+        <form method="post">
+            {% csrf_token %}
+            <div class="input-group">
+                <label for="id_username">사용자 이름:</label>
+                {{ form.username }} <!-- 사용자 이름 필드 -->
+            </div>
+            <div class="input-group">
+                <label for="id_password1">비밀번호:</label>
+                {{ form.password1 }} <!-- 비밀번호 필드 -->
+                <span class="helptext" id="id_password1_helptext">{{ form.password1.help_text }}</span> <!-- 도움말 텍스트 -->
+            </div>
+            <div class="input-group">
+                <label for="id_password2">비밀번호 확인:</label>
+                {{ form.password2 }} <!-- 비밀번호 확인 필드 -->
+                <span class="helptext" id="id_password2_helptext">{{ form.password2.help_text }}</span> <!-- 도움말 텍스트 -->
+            </div>
+            <button type="submit">가입하기</button>
+        </form>
+        
+        <p>이미 회원이신가요? <a href="{% url 'gallery:login' %}" class="login-link">로그인</a></p>
+    </div>
 </body>
 </html>
