@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
-    <link rel="icon" type="image/x-icon" href="./favicon.ico" />
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}"  />
     <style>
         /* 기본 스타일 초기화 */
         * {
@@ -110,6 +111,10 @@
             <div class="input-group">
                 <label for="password">Password</label>
                 <input type="password" name="password" required>
+            </div>
+            <div class="input-group">
+                <input type="checkbox" name="remember_me" id="remember_me">
+                <label for="remember_me">로그인 상태 유지</label>
             </div>
             <button type="submit">Login</button>
         </form>

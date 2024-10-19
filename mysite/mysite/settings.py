@@ -11,10 +11,14 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+print(STATICFILES_DIRS)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -120,7 +124,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -143,3 +147,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',     # 로컬호스트 IP
     '*',              # 모든 호스트를 허용 (보안에 주의!)
 ]
+
+
+# 세션 만료 시간 설정 (예: 2주)
+# SESSION_COOKIE_AGE = 1209600  # 2주 동안 세션 유지
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # 브라우저 종료 시 세션을 유지할지 여부

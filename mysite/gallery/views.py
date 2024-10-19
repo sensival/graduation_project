@@ -19,7 +19,18 @@ from django.contrib.auth import login
 
 ########### 로그인 ################
 class CustomLoginView(LoginView):
-    template_name = 'login.html'  # 로그인 페이지 템플릿 경로
+    template_name = 'login.html'
+
+    def form_valid(self, form):
+        remember_me = self.request.POST.get('remember_me')
+        
+        # remember_me가 체크되어 있지 않다면 세션 만료 시간을 브라우저 세션 종료 시점으로 설정
+        if not remember_me:
+            self.request.session.set_expiry(0)  # 브라우저 종료 시 세션 만료
+        else:
+            self.request.session.set_expiry(1209600)  # 2주 동안 세션 유지
+        
+        return super().form_valid(form) # 로그인 페이지 템플릿 경로
 
 ########### 가입 ################
 def signup_view(request):
