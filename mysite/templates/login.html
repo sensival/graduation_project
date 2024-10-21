@@ -6,7 +6,7 @@
     <title>로그인</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap">
     {% load static %}
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}"  />
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon_v4.ico' %}"  />
     <style>
         /* 기본 스타일 초기화 */
         * {
@@ -68,27 +68,28 @@
         button {
             width: 100%;
             padding: 10px;
-            background-color: #007bff;
+            background-color: #B4A2EB;
             border: none;
             border-radius: 4px;
             color: #fff;
             font-size: 16px;
             cursor: pointer;
             margin-bottom: 10px;
+            margin-top: 15px;
         }
 
         button:hover {
-            background-color: #0056b3;
+            background-color: #8176ff;
         }
 
         /* 회원가입 버튼에만 추가 마진 */
         .signup-button {
-            background-color: #007bff;
+            background-color: #B4A2EB;
             margin-top: 15px; /* 로그인 버튼과 간격 추가 */
         }
 
         .signup-button:hover {
-            background-color: #0056b3;
+            background-color: #8176ff;
         }
 
         .ko_font {
@@ -98,7 +99,10 @@
 </head>
 <body>
     <div class="login-container ko_font">
-        <h1 class="ko_font">Wound Gallery</h1>
+        <h1 class="ko_font">
+            <img src="{% static 'favicon_v4.ico' %}" alt="favicon" style="width: 40px; height: 40px; vertical-align: middle; margin-right: 3px;">
+            Kardex with Pictures
+        </h1>
         
         <h3>로그인</h3>
         
@@ -112,7 +116,7 @@
                 <label for="password">Password</label>
                 <input type="password" name="password" required>
             </div>
-            <div class="input-group">
+            <div>
                 <input type="checkbox" name="remember_me" id="remember_me">
                 <label for="remember_me">로그인 상태 유지</label>
             </div>
