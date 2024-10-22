@@ -2,6 +2,8 @@ import { REACT_APP_HOST_IP_ADDRESS } from '../env';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import WardCreate from './WardCreate';
+
 
 const Ward = () => {
     const [wards, setWards] = useState([]); // 병동 목록 상태
@@ -35,6 +37,16 @@ const Ward = () => {
         }
     };
 
+    const fetchWards = async () => {
+        const response = await axios.get(`${REACT_APP_HOST_IP_ADDRESS}gallery/api/wards/`);
+        setWards(response.data);
+      };
+    
+      useEffect(() => {
+        fetchWards();
+      }, []);
+    
+
     return (
         <div>
             <h2>Select a Ward</h2>
@@ -47,6 +59,7 @@ const Ward = () => {
                     </li>
                 ))}
             </ul>
+            <WardCreate onWardCreated={fetchWards} /> {/* 병동 생성 컴포넌트 추가 */}
             <button onClick={handleContinue}>Continue</button>
             {selectedWard && <p>You selected: {selectedWard.name}</p>}
         </div>
