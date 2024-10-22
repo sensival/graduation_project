@@ -1,18 +1,30 @@
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await axios.post('http://localhost:8000/gallery/api/logout/');
+      localStorage.removeItem('authToken'); // 로컬 저장소에서 토큰 삭제
+      sessionStorage.clear(); // 세션 스토리지 초기화
+      navigate('/login'); // /login 페이지로 리디렉트
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
+
   return (
     <Nav>
       <Logo to="/">Wound gallery</Logo>
       <Menu>
-        <NavItem to="/" exact>
-          Home
-        </NavItem>
-        <NavItem to="/">병동선택</NavItem>
-        <NavItem to="/">리스트보기</NavItem>
-        <NavItem to="/">로그아웃</NavItem>
+        <NavItem to="/" exact>Home</NavItem>
+        <NavItem to="/select-ward">병동선택</NavItem>
+        <NavItem to="/list">리스트보기</NavItem>
+        <NavItem as="button" onClick={handleLogout}>로그아웃</NavItem> {/* 버튼으로 설정 */}
       </Menu>
     </Nav>
   );
