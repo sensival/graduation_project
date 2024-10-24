@@ -13,6 +13,12 @@
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #ffffff !important;  /* 배경색을 흰색으로 강제 */
+    color: #333 !important;  /* 텍스트 색상을 검정색으로 강제 */
+  }
+}
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
