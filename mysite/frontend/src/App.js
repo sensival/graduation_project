@@ -1,13 +1,26 @@
 // App.js
+import './App.css'; 
 import React from 'react';
+import styled from 'styled-components';
+
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SelectWard from './components/Ward';
 import ExternalRedirect from './components/ExternalRedirect';
 
+const AppContainer = styled.div`
+  background-color: #fcf4fa; /* 배경색을 흰색으로 고정 */
+  color: #6c757d; /* 텍스트 색상 */
+  min-height: 100vh; /* 전체 높이를 채워 화면이 비지 않도록 설정 */
+  font-family: 'Noto Sans KR', sans-serif;
+
+  
+`;
+
 function App() {
   return (
-    <Router>
+    <AppContainer>
+      <Router>
       <div className="App">
         <Navbar />
         <Routes>
@@ -20,6 +33,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </AppContainer>
   );
 }
 
