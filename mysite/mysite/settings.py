@@ -152,3 +152,6 @@ ALLOWED_HOSTS = [
 # 세션 만료 시간 설정 (예: 2주)
 # SESSION_COOKIE_AGE = 1209600  # 2주 동안 세션 유지
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # 브라우저 종료 시 세션을 유지할지 여부
+
+# settings.py
+LOGOUT_REDIRECT_URL = 'http://localhost:3000/login'
