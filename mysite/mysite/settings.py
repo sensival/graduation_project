@@ -137,6 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # CORS 설정
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React 앱이 호스팅되는 주소
+    "http://192.168.0.5:3000",  # 모바일 네트워크에서 접근하는 IP 주소
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
