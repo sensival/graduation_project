@@ -1,7 +1,6 @@
 import styled,  { css }  from 'styled-components';
 
 export const WardContainer = styled.div`
-  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
@@ -19,12 +18,29 @@ export const WardContainer = styled.div`
     overflow-y: auto; /* 세로 스크롤 */
     overflow-x: auto; /* 가로 스크롤 */
     border: 1px solid #ccc; /* 경계선 설정 */
+    border-radius: 10px;
     padding: 15px; /* 내부 여백 */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
     background-color: #fff; /* 배경색 설정 */
-    width: 100%; /* 너비 설정 */
+    width: 25%; /* 너비 설정 */
     margin: 20px auto; /* 위아래 여백과 자동 가로 중앙 정렬 */
+
+    &:hover{
+      border: 0.813em solid #AEDED3;
+      border-radius: 5%;
     }
+    
+    @media screen and (max-width: 48em) {
+    position: relative;
+    width: 90%;
+
+    &:hover{
+      border: 0.513em solid #AEDED3;
+      border-radius: 10%;
+      width: 85%;
+    }
+    } ;
+  }
 
   ul {
     padding: 3px 0px;
@@ -41,7 +57,7 @@ export const WardContainer = styled.div`
   }
 
   li:hover {
-    color: #ff6347; /* hover 시 색상 변경 */
+    color: #AEDED3 /* hover 시 색상 변경 */
   }
   
   button.list {
@@ -54,7 +70,7 @@ export const WardContainer = styled.div`
     text-align: center; /* 텍스트 정렬 */
     
     &:hover {
-        color: #ff6347; /* hover 시 색상 변경 */
+       color: #6c757d;/* hover 시 색상 변경 */
     }
 
     &:focus {
@@ -66,20 +82,44 @@ button{
   color: white;
   padding: 1em;
   border: none;
-  border-radius: 4px;
+  border-radius: 20px;
   font-size: 1.1em;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 button:hover {
-  background-color: #9e82d8; /* 버튼 호버 색상 */
+  background-color: #AEDED3 /* 버튼 호버 색상 */
 }
 
 button.active {
-  background-color: #8a6fd0; /* 버튼 클릭 시 색상 */
+  background-color: #AEDED3; /* 버튼 클릭 시 색상 */
 }
 
+div.blank {
+  padding: 1em;
+ 
+}
+
+button.add {
+  background-color: white;
+  color: #9e82d8;
+  padding: 1em;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.add:hover {
+  background-color: white;
+  color:#AEDED3;
+}
+
+button.add:active {
+  background-color:#AEDED3;
+}
 
 
   } ;

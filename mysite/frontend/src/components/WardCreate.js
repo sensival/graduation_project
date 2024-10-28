@@ -38,7 +38,7 @@ const WardCreate = ({ onWardCreated }) => {
           onChange={(e) => setWardName(e.target.value)}
           required
         />
-        <button type="submit" className="add">병동 생성</button>
+        <button type="submit">병동 생성</button>
       </form>
       {error && <p>{error}</p>}
     </AddWard>
@@ -53,12 +53,29 @@ const AddWard = styled.div`
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 2em auto;
-//   width: 100%;
+  width: 20%;
 //   max-width: 600px;
+  font-family: 'Nanum Gothic', sans-serif;
+
+
+  &:hover{
+      border: 0.813em solid #AEDED3;
+      border-radius: 10%;
+    }
+    
+    @media screen and (max-width: 48em) {
+    position: relative;
+
+    &:hover{
+      border: 0.513em solid #AEDED3;
+      border-radius: 10%;
+      width: 50%;
+    }
+    } ;
 
   h4 {
     font-size: 1.2em;
-    color: #3a3a3a;
+    color: #6c757d;
     margin-bottom: 1em;
     text-align: center;
   }
@@ -79,7 +96,7 @@ const AddWard = styled.div`
     padding: 0.8em;
     font-size: 1em;
     border: 1px solid #d1d1d1;
-    border-radius: 4px;
+    border-radius: 15px;
     outline: none;
     transition: border-color 0.3s ease;
   }
@@ -89,24 +106,7 @@ const AddWard = styled.div`
     box-shadow: 0 0 5px rgba(180, 162, 235, 0.5); 
   }
 
-  button.add {
-    background-color: #B4A2EB;
-    color: white;
-    padding: 1em;
-    border: none;
-    border-radius: 4px;
-    font-size: 1.1em;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
 
-  button.add:hover {
-    background-color: #9e82d8;
-  }
-
-  button.add:active {
-    background-color: #8a6fd0;
-  }
 
   p {
     color: red;
@@ -114,10 +114,10 @@ const AddWard = styled.div`
     font-size: 0.9em;
   }
 
-//   @media screen and (max-width: 38em) {
-//     width: 70%;
-//     // padding: 7vh 0 5vh 0;
-//     font-size: 1.75rem;
-//     // flex-direction: column;
-//   }
+  @media screen and (max-width: 38em) {
+    width: 50%;
+    // padding: 7vh 0 5vh 0;
+    font-size: 1.0rem;
+    // flex-direction: column;
+  }
 `;

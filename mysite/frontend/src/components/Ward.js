@@ -58,9 +58,12 @@ const Ward = () => {
             </ul>
             </div>
             <button class="create" onClick={handleContinue}>Continue</button>
+            <div class="blank">
+
+            </div>
             <div>
-            <button onClick={toggleWardCreate}>
-                {showWardCreate ? '병동 추가 닫기' : '병동 추가 열기'}
+            <button class ="add" onClick={toggleWardCreate}>
+                {showWardCreate ? '새로운 병동 추가 하기' : '새로운 병동 추가 하기'}
             </button>
             {showWardCreate && (
                 <WardCreate onWardCreated={fetchWards} /> // 병동 생성 컴포넌트 조건부 렌더링

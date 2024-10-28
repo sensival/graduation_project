@@ -2,14 +2,13 @@
 import './App.css'; 
 import React from 'react';
 import styled from 'styled-components';
-
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SelectWard from './components/Ward';
 import ExternalRedirect from './components/ExternalRedirect';
 
 const AppContainer = styled.div`
-  background-color: #fcf4fa; /* 배경색을 흰색으로 고정 */
+  background-color: white ;/* 배경색을 흰색으로 고정 */
   color: #6c757d; /* 텍스트 색상 */
   min-height: 100vh; /* 전체 높이를 채워 화면이 비지 않도록 설정 */
   font-family: 'Noto Sans KR', sans-serif;
@@ -28,8 +27,8 @@ function App() {
           <Route path="/select-ward" element={<SelectWard />} />
 
           {/* Django 서버의 로그인/회원가입 페이지로 리디렉트 */}
-          <Route path="/login" element={<ExternalRedirect url="http://localhost:8000/gallery/login/" />} />
-          <Route path="/signup" element={<ExternalRedirect url="http://localhost:8000/gallery/signup/" />} />
+          <Route path="/login" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/login/" />} />
+          <Route path="/signup" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/signup/" />} />
         </Routes>
       </div>
     </Router>
