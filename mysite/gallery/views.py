@@ -91,7 +91,7 @@ class WardListAPI(generics.ListAPIView):
 class WardCreateAPI(generics.CreateAPIView):
     queryset = Ward.objects.all()
     serializer_class = WardSerializer
-    permission_classes = [IsAuthenticated]  # 로그인한 사용자만 접근 가능
+    permission_classes = [AllowAny]  # 로그인한 사용자만 접근 가능
 
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
