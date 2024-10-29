@@ -11,7 +11,7 @@ class SignUpForm(UserCreationForm):
         label=_("비밀번호"),  # 새로운 라벨
         widget=forms.PasswordInput,
         help_text=_(
-            "최소 4자리 이상이어야 합니다."
+            "최소 4자리 이상"
         ),
     )
     

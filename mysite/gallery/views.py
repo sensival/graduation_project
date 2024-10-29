@@ -33,7 +33,7 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         # 로그인 성공 후 React 앱의 /select-ward 페이지로 리디렉트
-        return 'http://localhost:3000/select-ward'
+        return 'http://192.168.0.5:3000/select-ward'
 
 ########### 가입 ################
 def signup_view(request):
@@ -42,7 +42,7 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # 회원가입 후 자동 로그인
-            return redirect('http://localhost:3000/select_ward')  # 병동 선택 페이지로 이동
+            return redirect('http://192.168.0.5:3000/select_ward')  # 병동 선택 페이지로 이동
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})

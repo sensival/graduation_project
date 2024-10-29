@@ -132,7 +132,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# LOGIN_REDIRECT_URL = '/gallery/select_ward/'   # 로그인 후 병동 선택 페이지로 이동
+LOGIN_REDIRECT_URL = '192.168.0.5:3000/select_ward/'   # 로그인 후 병동 선택 페이지로 이동
 
 # CORS 설정
 CORS_ALLOWED_ORIGINS = [
@@ -155,4 +155,4 @@ ALLOWED_HOSTS = [
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # 브라우저 종료 시 세션을 유지할지 여부
 
 # settings.py
-LOGOUT_REDIRECT_URL = 'http://localhost:3000/login'
+LOGOUT_REDIRECT_URL = 'http://192.168.0.5:3000/login'
