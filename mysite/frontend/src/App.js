@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import SelectWard from './components/Ward';
 import ExternalRedirect from './components/ExternalRedirect';
+import PatientList from './components/PatientList';
+import ListAndPicture from './pages/ListAndPicture';
 
 const AppContainer = styled.div`
   background-color: white ;/* 배경색을 흰색으로 고정 */
@@ -25,6 +27,8 @@ function App() {
         <Routes>
           <Route path="/" element={<SelectWard />} />
           <Route path="/select-ward" element={<SelectWard />} />
+          {/* 환자 목록 페이지 */}
+          <Route path="/list/:wardId" element={<ListAndPicture />} />
 
           {/* Django 서버의 로그인/회원가입 페이지로 리디렉트 */}
           <Route path="/login" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/login/" />} />

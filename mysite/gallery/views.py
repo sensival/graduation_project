@@ -101,10 +101,33 @@ class WardCreateAPI(generics.CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 # 환자 목록 API
-class PatientListAPI(generics.ListCreateAPIView):
-    queryset = Patient.objects.all()
+class PatientListAPI(generics.ListAPIView):
     serializer_class = PatientSerializer
-    permission_classes = [AllowAny] 
+    permission_classes = [AllowAny]
+
+    def get_queryset(self):
+        ward_id = self.kwargs['ward_id']  # URL에서 ward_id를 가져옴
+        return Patient.objects.filter(ward__id=ward_id)  # ward_id를 기준으로 환자 목록 필터링
+    
+
+# 환자 추가 API
+class PatientCreateAPI(generics.CreateAPIView):
+    serializer_class = PatientSerializer
+    permission_classes = [AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        ward_id = self.kwargs['ward_id']  # URL에서 ward_id 가져오기
+        try:
+            ward = Ward.objects.get(id=ward_id)  # Ward 객체가 존재하는지 확인
+        except Ward.DoesNotExist:
+            return Response({"error": "Ward not found."}, status=status.HTTP_404_NOT_FOUND)
+
+        # ward를 추가한 데이터로 직렬화기 검증 및 저장
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(ward=ward)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # 특정 환자의 사진 목록 API
 class PatientPhotosAPI(generics.ListCreateAPIView):
