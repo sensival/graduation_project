@@ -20,7 +20,7 @@ const Navbar = () => {
 
   return (
     <Nav>
-      <Logo to="/">Kardex with pictures</Logo>
+      <Logo to="/">Kardex Gallery</Logo>
       <Menu>
         <NavItem to="/" exact>Home</NavItem>
         <NavItem to="/select-ward">병동선택</NavItem>
