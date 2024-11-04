@@ -91,8 +91,14 @@ const PatientList = ({ wardId, onSelectPatient }) => {
         }
 
         try {
-            const response = await axios.post(`${REACT_APP_HOST_IP_ADDRESS}gallery/api/wards/${wardId}/patients/`, {
+            const response = await axios.post(`${REACT_APP_HOST_IP_ADDRESS}gallery/api/wards/${wardId}/patients/add`, {
                 name: newPatientName,
+                ward: wardId  // 외래키로 wardId를 보내는                 
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json"
+                }
             });
             setPatients([...patients, response.data]);
             setNewPatientName('');
