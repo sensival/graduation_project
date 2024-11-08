@@ -38,11 +38,22 @@ class WardSerializer(serializers.ModelSerializer):
         fields = ['id', 'name']
 
 class PatientSerializer(serializers.ModelSerializer):
+    ward = serializers.PrimaryKeyRelatedField(queryset=Ward.objects.all())
+    
     class Meta:
         model = Patient
         fields = ['id', 'name', 'ward']
 
 class PhotoSerializer(serializers.ModelSerializer):
+    uploaded_by_username = serializers.ReadOnlyField(source='uploaded_by.username')
+
+    class Meta:
+        model = Photo
+        fields = ['photo', 'upload_time', 'memo', 'uploaded_by_username']
+
+'''
+class PhotoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Photo
         fields = ['photo', 'upload_time', 'memo']
+'''
