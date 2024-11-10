@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom'; // useParams 추가
 import axios from 'axios';
 import { REACT_APP_HOST_IP_ADDRESS } from '../env';
 import { UploadContainer } from '../styles/UploadStyle';
 
-const PhotoUpload = ({ selectedPatient }) => {
-    const [photo, setPhoto] = useState(null); // 업로드할 사진 파일
-    const [memo, setMemo] = useState(''); // 사진 메모
-    const [uploadSuccess, setUploadSuccess] = useState(false); // 업로드 성공 여부
-    const [errorMessage, setErrorMessage] = useState(''); // 에러 메시지
+const PhotoUpload = () => {
+    const { patientId } = useParams(); // URL에서 patientId를 가져오기
+    const [photo, setPhoto] = useState(null);
+    const [memo, setMemo] = useState('');
+    const [uploadSuccess, setUploadSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleFileChange = (e) => {
         setPhoto(e.target.files[0]);
@@ -30,7 +32,7 @@ const PhotoUpload = ({ selectedPatient }) => {
 
         try {
             const response = await axios.post(
-                `${REACT_APP_HOST_IP_ADDRESS}gallery/api/patients/${selectedPatient.id}/photos/add/`,
+                `${REACT_APP_HOST_IP_ADDRESS}gallery/api/patients/${patientId}/photos/add/`,
                 formData,
                 { headers: { 'Content-Type': 'multipart/form-data' } }
             );
@@ -49,9 +51,9 @@ const PhotoUpload = ({ selectedPatient }) => {
     return (
         <UploadContainer>
             <h3>사진 업로드</h3>
-            {selectedPatient ? (
+            {patientId ? (
                 <>
-                    <p>선택된 환자: {selectedPatient.name}</p>
+                    <p>선택된 환자 ID: {patientId}</p>  {/* 환자 ID 출력 */}
                     <form onSubmit={handleUpload}>
                         <input type="file" accept="image/*" onChange={handleFileChange} />
                         <textarea
