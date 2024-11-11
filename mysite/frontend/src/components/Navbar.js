@@ -1,11 +1,22 @@
-import React from 'react';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, NavLink, useNavigate, useLocation} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { REACT_APP_HOST_IP_ADDRESS } from '../env';
 
 const Navbar = () => {
   const navigate = useNavigate();
+  const [username, setUsername] = useState(null); // username 상태 추가
+  const location = useLocation();
+
+  // URL에서 username을 추출하여 상태에 저장
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const usernameFromUrl = queryParams.get('username');
+    if (usernameFromUrl) {
+      setUsername(usernameFromUrl); // username 상태 업데이트
+    }
+  }, [location.search]);
 
   const handleLogout = async () => {
     try {
@@ -26,6 +37,7 @@ const Navbar = () => {
         <NavItem to="/select-ward">병동선택</NavItem>
         <NavItem to="/list">리스트보기</NavItem>
         <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton> {/* 버튼으로 설정 */}
+        <NavItem className="username">{username ? `${username}님` : '게스트님'}</NavItem>
       </Menu>
     </Nav>
   );
@@ -88,6 +100,19 @@ const NavItem = styled(NavLink)`
     align-items: center;
     font-size: 1em; /* 모바일에서 폰트 크기 조정 */
     width: 25%;
+  }
+  
+    /* 모바일 화면에서 숨기기 */
+  &.username {
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-left: 1em;
+    display: block;
+
+    @media (max-width: 768px) {
+      display: none; /* 768px 이하 화면에서는 숨김 */
+    }
   }
 `;
 

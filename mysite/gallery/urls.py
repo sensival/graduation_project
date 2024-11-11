@@ -2,6 +2,7 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView
 from .views import CustomLoginView, signup_view, LogoutView, WardListAPI, PatientListAPI, PatientPhotosAPI, WardCreateAPI, PatientCreateAPI, PhotoCreateAPI, PhotoDetailAPI
+from rest_framework_simplejwt import views as jwt_views
 
 app_name = 'gallery'
 

@@ -79,7 +79,7 @@
 import { REACT_APP_HOST_IP_ADDRESS } from '../env';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import WardCreate from './WardCreate';
 import { WardContainer } from '../styles/WardStyle';
 
@@ -87,6 +87,17 @@ const Ward = () => {
     const [wards, setWards] = useState([]);
     const [showWardCreate, setShowWardCreate] = useState(false);
     const navigate = useNavigate();
+    const location = useLocation();
+    const [username, setUsername] = useState(null);  // username 상태 관리
+
+    // 쿼리 파라미터에서 username을 추출
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const user = queryParams.get('username');
+        if (user) {
+            setUsername(user);  // username 상태 설정
+        }
+    }, [location]);
 
     const fetchWards = async () => {
         try {

@@ -1,5 +1,6 @@
 # views.py
 from rest_framework import viewsets, generics, status
+from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .models import Ward, Patient, Photo
@@ -27,9 +28,16 @@ class CustomLoginView(LoginView):
             self.request.session.set_expiry(0)  # 브라우저 종료 시 세션 만료
         else:
            self.request.session.set_expiry(1209600)  # 2주 동안 세션 유지(------)
+        
 
-        # 로그인 후 성공 URL로 리디렉션
-        return HttpResponseRedirect(self.get_success_url())
+        usr_name = self.request.POST.get('username')
+
+        print("username",  usr_name)
+
+        # 리디렉션 시 username을 쿼리 파라미터로 전달
+        print(f"Redirecting to: http://192.168.0.5:3000/select-ward?username={usr_name}")
+        return HttpResponseRedirect(f'http://192.168.0.5:3000/select-ward?username={usr_name}')
+
 
     def get_success_url(self):
         # 로그인 성공 후 React 앱의 /select-ward 페이지로 리디렉트
@@ -146,7 +154,7 @@ class PatientPhotosAPI(generics.ListCreateAPIView):
 # 사진 업로드 API
 class PhotoCreateAPI(generics.CreateAPIView):
     serializer_class = PhotoSerializer
-    permission_classes = [AllowAny]
+    permission_classes =  [AllowAny] 
 
     def perform_create(self, serializer):
         # URL에서 patient_id를 가져옵니다.
