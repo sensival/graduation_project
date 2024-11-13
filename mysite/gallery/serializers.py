@@ -45,11 +45,10 @@ class PatientSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'ward']
 
 class PhotoSerializer(serializers.ModelSerializer):
-    uploaded_by_username = serializers.ReadOnlyField(source='uploaded_by.username')
 
     class Meta:
         model = Photo
-        fields = ['photo', 'upload_time', 'memo', 'uploaded_by_username']
+        fields = ['photo', 'upload_time', 'memo', 'uploaded_by']
 
 '''
 class PhotoSerializer(serializers.ModelSerializer):

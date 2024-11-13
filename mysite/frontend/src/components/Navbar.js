@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import { Link, NavLink, useNavigate, useLocation} from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import { REACT_APP_HOST_IP_ADDRESS } from '../env';
+import { UsernameContext } from '../components/UsernameContext'; // Context import
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState(null); // username 상태 추가
+  // const [username, setUsername] = useState(null); // username 상태 추가
   const location = useLocation();
+  const { username, setUsername } = useContext(UsernameContext); // Context 사용
+
 
   // URL에서 username을 추출하여 상태에 저장
   useEffect(() => {
@@ -16,7 +19,7 @@ const Navbar = () => {
     if (usernameFromUrl) {
       setUsername(usernameFromUrl); // username 상태 업데이트
     }
-  }, [location.search]);
+  }, [location.search, setUsername]);
 
   const handleLogout = async () => {
     try {

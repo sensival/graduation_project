@@ -158,17 +158,30 @@ class PatientPhotosAPI(generics.ListCreateAPIView):
         serializer.save(patient=patient)
 
 # 사진 업로드 API
+
 class PhotoCreateAPI(generics.CreateAPIView):
     serializer_class = PhotoSerializer
-    permission_classes =  [AllowAny] 
+    permission_classes = [AllowAny]
 
     def perform_create(self, serializer):
-        # URL에서 patient_id를 가져옵니다.
         patient_id = self.kwargs['patient_id']
+        username = self.request.data.get('uploaded_by')  # 요청에서 username 가져오기
+
         serializer.save(
-            uploaded_by=self.request.user,
-            patient_id=patient_id  # Photo 모델에 patient 필드가 있어야 함
+            uploaded_by=username,  # username 저장
+            patient_id=patient_id  # patient_id 저장
         )
+# class PhotoCreateAPI(generics.CreateAPIView):
+#     serializer_class = PhotoSerializer
+#     permission_classes =  [AllowAny] 
+
+#     def perform_create(self, serializer):
+#         # URL에서 patient_id를 가져옵니다.
+#         patient_id = self.kwargs['patient_id']
+#         serializer.save(
+#             uploaded_by=self.request.user,
+#             patient_id=patient_id  # Photo 모델에 patient 필드가 있어야 함
+#         )
 
 
 # 개별 사진에 대해 조회(Retrieve), 수정(Update), 삭제(Delete) 기능 제공.

@@ -1,6 +1,6 @@
 // App.js
 import './App.css'; 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
@@ -9,6 +9,7 @@ import ExternalRedirect from './components/ExternalRedirect';
 import PatientList from './components/PatientList';
 import ListAndPicture from './pages/ListAndPicture';
 import PhotoUpload from './pages/PhotoUpload';
+import { UsernameProvider } from './components/UsernameContext';
 
 const AppContainer = styled.div`
   background-color: white ;/* 배경색을 흰색으로 고정 */
@@ -20,17 +21,28 @@ const AppContainer = styled.div`
 `;
 
 function App() {
+  const [username, setUsername] = useState('');
+
+  useEffect(() => {
+    // 예시: sessionStorage 또는 다른 저장소에서 username 가져오기
+    const storedUsername = sessionStorage.getItem('username');
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
+  }, []);
+
   return (
     <AppContainer>
+      <UsernameProvider>
       <Router>
       <div className="App">
-        <Navbar />
+        <Navbar username={username}  />
         <Routes>
-          <Route path="/" element={<SelectWard />} />
+          <Route path="/" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/login/" />}/>
           <Route path="/select-ward" element={<SelectWard />} />
           {/* 환자 목록 페이지 */}
           <Route path="/list/:wardId" element={<ListAndPicture />} />
-          <Route path="/patients/:patientId/upload" element={<PhotoUpload />} />
+          <Route path="/patients/:patientId/upload" element={<PhotoUpload  username={username} />} />
           {/* Django 서버의 로그인/회원가입 페이지로 리디렉트 */}
           <Route path="/login" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/login/" />} />
           <Route path="/signup" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/signup/" />} />
@@ -38,6 +50,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+    </UsernameProvider>
     </AppContainer>
   );
 }

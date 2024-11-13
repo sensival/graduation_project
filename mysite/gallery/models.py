@@ -15,7 +15,7 @@ class Photo(models.Model):
     photo = models.ImageField(upload_to='patient_photos/')
     upload_time = models.DateTimeField(default=timezone.now)  # Default to current time
     memo = models.TextField(blank=True, null=True)  # Optional memo
-    uploaded_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='uploaded_photos')  # 게시자
+    uploaded_by = models.CharField(max_length=255, blank=True, null=True) # 게시자
 
     def __str__(self):
         return f"Photo of {self.patient.name} - {self.upload_time}"
