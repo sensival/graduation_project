@@ -15,6 +15,7 @@ from django.shortcuts import render, redirect
 from .models import Ward, Patient
 from .forms import SignUpForm
 from django.http import HttpResponseRedirect
+from django.contrib import messages
 
 ########### 로그인 ################
 class CustomLoginView(LoginView):
@@ -37,6 +38,11 @@ class CustomLoginView(LoginView):
         # 리디렉션 시 username을 쿼리 파라미터로 전달
         print(f"Redirecting to: http://192.168.0.5:3000/select-ward?username={usr_name}")
         return HttpResponseRedirect(f'http://192.168.0.5:3000/select-ward?username={usr_name}')
+    
+    def form_invalid(self, form):
+        # 로그인 실패 시 메시지 추가
+        messages.error(self.request, "아이디 또는 비밀번호가 일치하지 않습니다.")
+        return super().form_invalid(form)
 
 
     def get_success_url(self):

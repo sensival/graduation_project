@@ -122,10 +122,17 @@
             </div>
             <button type="submit">Login</button>
         </form>
-        
+        {% if messages %}
+        <script>
+            {% for message in messages %}
+            alert("{{ message }}");
+            {% endfor %}
+        </script>
+        {% endif %}
         <a href="{% url 'gallery:signup' %}">
             <button class="signup-button">회원 가입</button>
         </a>
     </div>
+
 </body>
 </html>
