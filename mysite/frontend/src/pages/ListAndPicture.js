@@ -1,3 +1,4 @@
+//ListAndPictur
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // useNavigate 추가
 import PatientList from '../components/PatientList';
@@ -22,16 +23,19 @@ const Content = styled.div`
 `;
 
 const UploadButton = styled.button`
+
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #B4A2EB;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
     &:hover {
-        background-color: #0056b3;
+        background-color: #AEDED3;
     }
 `;
 
@@ -46,7 +50,7 @@ const ListAndPicture = () => {
 
     const goToPhotoUpload = () => {
         if (selectedPatient) {
-            navigate(`/patients/${selectedPatient.id}/upload`);
+            navigate(`/patients/${selectedPatient.id}/upload?wardId=${wardId}`);
         } else {
             alert('환자를 먼저 선택해주세요!');
         }

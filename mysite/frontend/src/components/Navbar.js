@@ -1,3 +1,4 @@
+//PatientL
 import React, { useEffect, useContext } from 'react';
 import { Link, NavLink, useNavigate, useLocation} from 'react-router-dom';
 import styled from 'styled-components';
@@ -54,6 +55,7 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 
   @media (max-width: 768px) {
     flex-direction: column; /* 모바일에서는 수직으로 배치 */

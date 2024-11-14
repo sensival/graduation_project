@@ -10,6 +10,7 @@ export const NavBox = styled.div`
   position: fixed;
   z-index: 2;
   padding: 0.313rem 15vw 0.313rem 0;
+  
   svg {
     cursor: pointer;
     width: 2.25rem;
