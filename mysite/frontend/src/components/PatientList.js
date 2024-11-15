@@ -56,6 +56,7 @@ const PatientList = ({ wardId, onSelectPatient }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [newPatientName, setNewPatientName] = useState('');
     const [isAddingPatient, setIsAddingPatient] = useState(false);  // 추가 폼 표시 여부 상태
+    const [activeButton, setActiveButton] = useState(null); // 활성화된 버튼 상태
 
     useEffect(() => {
         if (!wardId) {
@@ -112,29 +113,38 @@ const PatientList = ({ wardId, onSelectPatient }) => {
         setIsAddingPatient(!isAddingPatient);  // 폼 표시 여부 토글
     };
 
+    // 버튼 클릭 시 active 상태 관리
+    const handleButtonClick = (id) => {
+        if (activeButton === id) {
+            setActiveButton(null); // 이미 클릭한 버튼을 다시 클릭하면 비활성화
+        } else {
+            setActiveButton(id); // 클릭한 버튼을 활성화
+        }
+    };
+
     return (
         <div>
             <ListContainer>
                 {/* Toggle Add Patient Form */}
-                <button class ="add" onClick={toggleAddPatientForm}>
-                {isAddingPatient ? '취소' : '+ Add Patient'}
+                <button className="add" onClick={toggleAddPatientForm}>
+                    {isAddingPatient ? '취소' : '+ Add Patient'}
                 </button>
 
                 {/* Add Patient Form */}
                 {isAddingPatient && (
                     <AddPatient>
-                    <form onSubmit={handleAddPatient}>
-                        <input
-                            type="text"
-                            placeholder="새 환자 이름"
-                            value={newPatientName}
-                            onChange={(e) => setNewPatientName(e.target.value)}
-                        />
-                        <button type="submit">추가</button>
-                    </form>
+                        <form onSubmit={handleAddPatient}>
+                            <input
+                                type="text"
+                                placeholder="새 환자 이름"
+                                value={newPatientName}
+                                onChange={(e) => setNewPatientName(e.target.value)}
+                            />
+                            <button type="submit">추가</button>
+                        </form>
                     </AddPatient>
                 )}
-                <div class="blank"></div>
+                <div className="blank"></div>
 
                 {/* Search Input */}
                 <input
@@ -148,14 +158,18 @@ const PatientList = ({ wardId, onSelectPatient }) => {
                 <ul>
                     {filteredPatients.map((patient) => (
                         <li key={patient.id}>
-                            <button onClick={() => onSelectPatient(patient)}>
+                            <button
+                                className={activeButton === patient.id ? 'active' : ''}
+                                onClick={() => {
+                                    onSelectPatient(patient);
+                                    handleButtonClick(patient.id); // 버튼 클릭 시 active 상태 관리
+                                }}
+                            >
                                 {patient.name}
                             </button>
                         </li>
                     ))}
                 </ul>
-
-
             </ListContainer>
         </div>
     );

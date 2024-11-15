@@ -4,12 +4,16 @@ export const ListContainer = styled.div`
     overflow-y: auto; /* 세로 스크롤 */
     overflow-x: auto; /* 가로 스크롤 */
 
+  @media (max-width: 768px) {
+  }
+
  /* ul과 li 스타일 추가 */
 
   ul {
     padding: 0px 0px;
     padding-left: 0.2rem;
     list-style-type: none;
+    
   }
 
   li {
@@ -36,6 +40,12 @@ button{
   font-size: 0.8em;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  @media (max-width: 768px) {
+    flex-direction: column; /* 모바일에서는 수직으로 배치 */
+    padding: 0.3em;
+    font-size: 0.7em;
+  }
 }
 
 button:hover {
@@ -63,6 +73,16 @@ button.add{
   font-size: 0.9em;
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    flex-direction: column; /* 모바일에서는 수직으로 배치 */
+    padding: 0.5em; 0.7em;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: center;    /* 수평 중앙 정렬 */
+    align-items: center;    
+  }
   
 }
 
@@ -84,6 +104,13 @@ input[type="text"] {
     font-size: 16px;  /* 폰트 크기 조정 */
     outline: none;  /* 포커스 시 기본 윤곽선 제거 */
     transition: all 0.3s ease;  /* 애니메이션 추가로 포커스 효과 부드럽게 */
+  
+    @media (max-width: 768px) {
+    width: 80%;
+    flex-direction: column; /* 모바일에서는 수직으로 배치 */
+    padding: 0.8em;
+    font-size: 0.8em;
+  }
 }
 
 input[type="text"]:focus {
@@ -111,21 +138,31 @@ export const  AddPatient = styled.div`
 //   max-width: 600px;
   font-family: 'Nanum Gothic', sans-serif;
 
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 1em 1em;
+    font-size: 0.7em;
+    display: flex;
+    justify-content: center;    /* 수평 중앙 정렬 */
+    align-items: center;   
+  }
+
 
   &:hover{
       border: 0.813em solid #AEDED3;
       border-radius: 10%;
     }
     
-    @media screen and (max-width: 48em) {
+  @media screen and (max-width: 48em) {
     position: relative;
 
     &:hover{
-      border: 0.513em solid #AEDED3;
+      border: 0.3em solid #AEDED3;
       border-radius: 10%;
       width: 50%;
     }
     } ;
+
   button{
     background-color: #B4A2EB;
     color: white;
@@ -135,7 +172,16 @@ export const  AddPatient = styled.div`
     font-size: 0.8em;
     cursor: pointer;
     transition: background-color 0.3s ease;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 0.5em; 1.0 em;
+      font-size: 0.9em;
+      display: flex;
+      justify-content: center;    /* 수평 중앙 정렬 */
+      align-items: center;   
     }
+  }
 
     button:hover {
      background-color: #AEDED3 /* 버튼 호버 색상 */
@@ -152,6 +198,15 @@ export const  AddPatient = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1.5em;
+
+  @media (max-width: 768px) {
+      gap: 0.5em;
+      width: 100s%;
+      font-size: 0.7em;
+      justify-content: center;    /* 수평 중앙 정렬 */
+      align-items: center;   
+    }
+    
   }
 
   label {
@@ -167,6 +222,7 @@ export const  AddPatient = styled.div`
     border-radius: 15px;
     outline: none;
     transition: border-color 0.3s ease;
+    
   }
 
   input:focus {

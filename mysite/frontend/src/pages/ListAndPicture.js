@@ -15,6 +15,12 @@ const Sidebar = styled.div`
     padding: 20px;
     background-color: #f7f7f7;
     border-right: 1px solid #ddd;
+    
+    @media (max-width: 768px) {
+    width: 35%;
+    padding: 0.5em; 0.8em;
+    font-size: 0.9em;
+  }
 `;
 
 const Content = styled.div`

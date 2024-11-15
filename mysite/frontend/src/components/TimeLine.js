@@ -1,5 +1,7 @@
+//TimeLine.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { REACT_APP_HOST_IP_ADDRESS } from '../env';
 
 const TimeLine = ({ patientId }) => {
     const [photos, setPhotos] = useState([]);
@@ -9,7 +11,13 @@ const TimeLine = ({ patientId }) => {
 
         const fetchPhotos = async () => {
             try {
-                const response = await axios.get(`${process.env.REACT_APP_HOST_IP_ADDRESS}/patients/${patientId}/photos`);
+                const response = await axios.get(`${REACT_APP_HOST_IP_ADDRESS}gallery/api/patients/${patientId}/photos`,{
+                    method: 'GET',
+                    headers: {
+                      'Content-Type': 'application/json',
+                    },
+                    credentials: 'include'  // 자격 증명 포함
+                  });
                 setPhotos(response.data);
             } catch (error) {
                 console.error('Error fetching photos:', error);
