@@ -12,7 +12,7 @@ class Patient(models.Model):
 
 class Photo(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='photos')
-    photo = models.ImageField(upload_to='patient_photos/')
+    photo = models.ImageField(upload_to='photos/')
     upload_time = models.DateTimeField(default=timezone.now)  # Default to current time
     memo = models.TextField(blank=True, null=True)  # Optional memo
     uploaded_by = models.CharField(max_length=255, blank=True, null=True) # 게시자

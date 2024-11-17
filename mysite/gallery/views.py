@@ -158,7 +158,6 @@ class PatientPhotosAPI(generics.ListCreateAPIView):
         serializer.save(patient=patient)
 
 # 사진 업로드 API
-
 class PhotoCreateAPI(generics.CreateAPIView):
     serializer_class = PhotoSerializer
     permission_classes = [AllowAny]
