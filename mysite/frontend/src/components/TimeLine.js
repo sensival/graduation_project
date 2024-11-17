@@ -18,6 +18,7 @@ const TimeLine = ({ patientId }) => {
                     },
                     credentials: 'include'  // 자격 증명 포함
                   });
+
                 setPhotos(response.data);
             } catch (error) {
                 console.error('Error fetching photos:', error);
@@ -27,6 +28,7 @@ const TimeLine = ({ patientId }) => {
         fetchPhotos();
     }, [patientId]);
 
+
     return (
         <div>
             <h3>사진 타임라인</h3>
@@ -34,9 +36,10 @@ const TimeLine = ({ patientId }) => {
                 {photos.length > 0 ? (
                     photos.map((photo) => (
                         <div key={photo.id}>
-                            <img src={photo.url} alt="Patient Timeline" />
-                            <p>{photo.timestamp}</p>
+                            <img src={photo.photo} alt="Patient Timeline" />
+                            <p>{photo.upload_time}</p>
                             <p>{photo.memo}</p>
+                            <p>{photo.uploaded_by}</p>
                         </div>
                     ))
                 ) : (

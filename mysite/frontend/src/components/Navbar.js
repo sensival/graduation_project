@@ -50,6 +50,10 @@ const Navbar = () => {
 export default Navbar;
 
 const Nav = styled.nav`
+  position: fixed; /* 스크롤해도 고정되도록 설정 */
+  width: 98%; /* 화면 전체 너비를 차지 */
+  top: 0; /* 화면 맨 위에 고정 */
+  z-index: 1000; /* 다른 요소 위에 배치 */
   background-color: #B4A2EB;
   padding: 1em;
   display: flex;
@@ -60,6 +64,9 @@ const Nav = styled.nav`
   @media (max-width: 768px) {
     flex-direction: column; /* 모바일에서는 수직으로 배치 */
     padding: 0.5em;
+    display: flex;
+      justify-content: center;    /* 수평 중앙 정렬 */
+      align-items: center;  
   }
 `;
 

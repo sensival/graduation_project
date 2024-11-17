@@ -15,17 +15,34 @@ const Sidebar = styled.div`
     padding: 20px;
     background-color: #f7f7f7;
     border-right: 1px solid #ddd;
-    
+    position: fixed; /* 스크롤해도 고정되도록 설정 */
+    margin-top : 4em ;
+    height: 100vh; 
+    overflow-y: auto; /* 내용이 많으면 스크롤 가능하게 설정 */
+
     @media (max-width: 768px) {
     width: 35%;
     padding: 0.5em; 0.8em;
     font-size: 0.9em;
+    margin-top : 5em ;
   }
 `;
 
 const Content = styled.div`
     width: 70%;
     padding: 20px;
+    position: fixed; /* 스크롤해도 고정되도록 설정 */
+    margin-top : 4em ;
+    height: 100vh; 
+    overflow-y: auto;
+    margin-left: 33em;
+
+    @media (max-width: 768px) {
+    margin-left: 10em;
+    width: 65%;
+    font-size: 0.7em;
+    align-items: center;  
+  }
 `;
 
 const UploadButton = styled.button`
