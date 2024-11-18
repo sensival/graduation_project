@@ -110,7 +110,7 @@ const NavItem = styled(NavLink)`
   @media (max-width: 768px) {
     justify-content: space-around; 
     align-items: center;
-    font-size: 1em; /* 모바일에서 폰트 크기 조정 */
+    font-size: 0.9em; /* 모바일에서 폰트 크기 조정 */
     width: 25%;
   }
   
@@ -145,7 +145,14 @@ const LogoutButton = styled.button`
   }
 
   @media (max-width: 768px) {
-    font-size: 1em; /* 모바일에서 폰트 크기 조정 */
+    font-size: 0.7em; /* 모바일에서 폰트 크기 조정 */
+    margin-right: 0;
+    color: white;
+    background: #B2ACFA;
+    border: 1px solid #ccc; /* 경계선 설정 */
+    border-radius: 10px;
+    padding: 0.3em;
+
   }
 `;
 

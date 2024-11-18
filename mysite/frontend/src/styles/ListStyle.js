@@ -13,6 +13,7 @@ export const ListContainer = styled.div`
     padding: 0px 0px;
     padding-left: 0.2rem;
     list-style-type: none;
+
     
   }
 
@@ -26,6 +27,7 @@ export const ListContainer = styled.div`
 
   li:hover {
     color: #AEDED3 /* hover 시 색상 변경 */
+
   }
   
 
@@ -55,6 +57,10 @@ button:hover {
 
 button.active {
   background-color: #AEDED3; /* 버튼 클릭 시 색상 */
+@media (max-width: 768px) {
+    display: flex;
+    align-items: center;  
+}
 }
 
 div.blank {

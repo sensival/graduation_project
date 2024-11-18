@@ -30,12 +30,12 @@ const Sidebar = styled.div`
 
 const Content = styled.div`
     width: 70%;
-    padding: 20px;
+    padding: 50px;
     position: fixed; /* 스크롤해도 고정되도록 설정 */
-    margin-top : 4em ;
+    margin-top : 2% ;
     height: 100vh; 
     overflow-y: auto;
-    margin-left: 33em;
+    margin-left: 20%;
 
     @media (max-width: 768px) {
     margin-left: 10em;
@@ -56,6 +56,8 @@ const UploadButton = styled.button`
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed; 
+    z-index: 999; 
 
     &:hover {
         background-color: #AEDED3;
