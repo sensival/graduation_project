@@ -17,7 +17,7 @@ urlpatterns = [
     path('api/wards/<int:ward_id>/patients/add', PatientCreateAPI.as_view(), name='add_patient'),
     path('api/patients/<int:patient_id>/photos/', PatientPhotosAPI.as_view(), name='api_patient_photos'),
     path('api/patients/<int:patient_id>/photos/add/', PhotoCreateAPI.as_view(), name='add_photo'),  # 사진 업로드 API
-    path('api/photos/<int:pk>/', PhotoDetailAPI.as_view(), name='photo_detail'),  # 개별 사진 조회, 수정, 삭제
+    path('api/patients/<int:patient_id>/photos/<int:pk>/update/', PhotoDetailAPI.as_view(), name='photo_detail'),  # 개별 사진 조회, 수정, 삭제
 ]
 
 

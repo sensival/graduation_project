@@ -9,6 +9,7 @@ import ExternalRedirect from './components/ExternalRedirect';
 import PatientList from './components/PatientList';
 import ListAndPicture from './pages/ListAndPicture';
 import PhotoUpload from './pages/PhotoUpload';
+import UpdatePhoto from './pages/UpdatePhoto'; 
 import { UsernameProvider } from './components/UsernameContext';
 
 const AppContainer = styled.div`
@@ -43,6 +44,7 @@ function App() {
           {/* 환자 목록 페이지 */}
           <Route path="/list/:wardId" element={<ListAndPicture />} />
           <Route path="/patients/:patientId/upload" element={<PhotoUpload  username={username} />} />
+          <Route path="/patients/:patientId/update" element={<UpdatePhoto username={username} />} /> {/* UpdatePhoto 페이지로 수정 */}
           {/* Django 서버의 로그인/회원가입 페이지로 리디렉트 */}
           <Route path="/login" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/login/" />} />
           <Route path="/signup" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/signup/" />} />

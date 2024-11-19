@@ -99,8 +99,58 @@ export const PhotoMeta = styled.div`
     margin-bottom: 10px;
 `;
 
+export const ButtonMeta = styled.div`
+    display: flex;
+    align-items: right;
+    margin-bottom: 2%;
+    margin-left: 80%;
+`;
+
 export const Button = styled.button`
   display: flex;
   justify-content: space-evenly;
-  }
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+
+  &.update {
+    background-color: #B4A2EB;
+    color: white;
+    padding: 0.2em 1em 0.4em 1em;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9em;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    }
+
+   &.update:hover {
+    background-color: #AEDED3 /* 버튼 호버 색상 */
+    }
+
+   &.update.active {
+    background-color: #AEDED3; /* 버튼 클릭 시 색상 */
+    }
+  } 
+
+  &.delete {
+    background-color: #ff623c;
+    color: white;
+    margin-left: 0.5em;
+    font-weight: bold;
+    padding:0.2em 1em 0.4em 1em;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    }
+
+  &.delete:hover {
+    background-color: #FFE4BA; /* 버튼 호버 색상 */
+    }
+
+  &.delete.active {
+    background-color: #FFE4BA; /* 버튼 클릭 시 색상 */
+    }
+  } 
 `;

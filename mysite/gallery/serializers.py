@@ -48,7 +48,24 @@ class PhotoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Photo
-        fields = ['photo', 'upload_time', 'memo', 'uploaded_by']
+        fields = ['id','photo', 'upload_time', 'memo', 'uploaded_by']
+
+    def update(self, instance, validated_data):
+        # 파일 업로드가 없는 경우 기존 사진을 유지
+        photo = validated_data.get('photo', None)
+        if photo:
+            # 새로운 파일이 있다면, 이를 기존 사진으로 교체
+            instance.photo = photo
+
+        # 메모와 같은 다른 필드는 변경이 있을 때 업데이트
+        instance.memo = validated_data.get('memo', instance.memo)
+        instance.uploaded_by = validated_data.get('uploaded_by', instance.uploaded_by)
+
+        # 저장
+        instance.save()
+        return instance
+    
+
 
 '''
 class PhotoSerializer(serializers.ModelSerializer):

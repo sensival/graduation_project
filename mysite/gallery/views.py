@@ -16,6 +16,7 @@ from .models import Ward, Patient
 from .forms import SignUpForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
+from rest_framework.exceptions import NotFound
 
 ########### 로그인 ################
 class CustomLoginView(LoginView):
@@ -150,12 +151,25 @@ class PatientPhotosAPI(generics.ListCreateAPIView):
 
     def get_queryset(self):
         patient_id = self.kwargs['patient_id']
+        # Patient가 존재하는지 확인
+        if not Patient.objects.filter(id=patient_id).exists():
+            raise NotFound(f"ID {patient_id}에 해당하는 환자를 찾을 수 없습니다.")
+        
         return Photo.objects.filter(patient_id=patient_id)
 
     def perform_create(self, serializer):
         patient_id = self.kwargs['patient_id']
-        patient = Patient.objects.get(id=patient_id)
+        try:
+            patient = Patient.objects.get(id=patient_id)
+        except Patient.DoesNotExist:
+            raise NotFound(f"ID {patient_id}에 해당하는 환자를 찾을 수 없습니다.")
         serializer.save(patient=patient)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            return Response([])  # 빈 배열 반환
+        return super().list(request, *args, **kwargs)
 
 # 사진 업로드 API
 class PhotoCreateAPI(generics.CreateAPIView):
@@ -186,4 +200,20 @@ class PhotoCreateAPI(generics.CreateAPIView):
 # 개별 사진에 대해 조회(Retrieve), 수정(Update), 삭제(Delete) 기능 제공.
 class PhotoDetailAPI(generics.RetrieveUpdateDestroyAPIView):
     queryset = Photo.objects.all()
-    serializer_class = PhotoSerializer
+    serializer_class = PhotoSerializer 
+
+    def get(self, request, *args, **kwargs):
+        # 사진을 조회하는 기능
+        return super().get(request, *args, **kwargs)
+
+    def put(self, request, *args, **kwargs):
+        # 사진을 전체적으로 수정하는 기능
+        return super().put(request, *args, **kwargs)
+
+    def patch(self, request, *args, **kwargs):
+        # 사진의 일부 필드만 수정하는 기능 (partial update)
+        return super().patch(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        # 사진을 삭제하는 기능
+        return super().delete(request, *args, **kwargs)

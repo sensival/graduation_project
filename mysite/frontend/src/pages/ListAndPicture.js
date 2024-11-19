@@ -1,4 +1,4 @@
-//ListAndPictur
+//ListAndPictures.js
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'; // useNavigate 추가
 import PatientList from '../components/PatientList';
@@ -46,8 +46,9 @@ const Content = styled.div`
 `;
 
 const UploadButton = styled.button`
-
-    margin-top: 20px;
+    position: fixed; /* 화면에서 고정 위치 설정 */
+    bottom: 20px; /* 화면 하단으로부터 20px */
+    right: 20px; /* 화면 오른쪽으로부터 20px */
     padding: 10px 20px;
     background-color: #B4A2EB;
     color: white;
@@ -56,8 +57,7 @@ const UploadButton = styled.button`
     cursor: pointer;
     transition: background-color 0.3s ease;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    position: fixed; 
-    z-index: 999; 
+    z-index: 999;
 
     &:hover {
         background-color: #AEDED3;
