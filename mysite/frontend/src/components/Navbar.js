@@ -138,6 +138,7 @@ const LogoutButton = styled.button`
 
   &:hover {
     color: #AEDED3;
+    background: none;
   }
 
   &:focus {
