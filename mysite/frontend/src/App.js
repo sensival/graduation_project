@@ -11,6 +11,7 @@ import ListAndPicture from './pages/ListAndPicture';
 import PhotoUpload from './pages/PhotoUpload';
 import UpdatePhoto from './pages/UpdatePhoto'; 
 import { UsernameProvider } from './components/UsernameContext';
+import { REACT_APP_HOST_IP_ADDRESS } from './env.js';
 
 const AppContainer = styled.div`
   background-color: white ;/* 배경색을 흰색으로 고정 */
@@ -39,15 +40,15 @@ function App() {
       <div className="App">
         <Navbar username={username}  />
         <Routes>
-          <Route path="/" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/login/" />}/>
+          <Route path="/" element={<ExternalRedirect url={`${REACT_APP_HOST_IP_ADDRESS}gallery/login/`}/>}/>
           <Route path="/select-ward" element={<SelectWard />} />
           {/* 환자 목록 페이지 */}
           <Route path="/list/:wardId" element={<ListAndPicture />} />
           <Route path="/patients/:patientId/upload" element={<PhotoUpload  username={username} />} />
           <Route path="/patients/:patientId/update" element={<UpdatePhoto username={username} />} /> {/* UpdatePhoto 페이지로 수정 */}
           {/* Django 서버의 로그인/회원가입 페이지로 리디렉트 */}
-          <Route path="/login" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/login/" />} />
-          <Route path="/signup" element={<ExternalRedirect url="http://192.168.0.5:8000/gallery/signup/" />} />
+          <Route path="/login" element={<ExternalRedirect url={`${REACT_APP_HOST_IP_ADDRESS}gallery/login/`} />} />
+          <Route path="/signup" element={<ExternalRedirect url={`${REACT_APP_HOST_IP_ADDRESS}gallery/signup/`} />} />
 
         </Routes>
       </div>
