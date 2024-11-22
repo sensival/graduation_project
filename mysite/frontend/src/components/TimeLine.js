@@ -24,11 +24,12 @@ const formatDateToKoreanTime = (dateString) => {
 
 const TimeLine = ({ patientId }) => {
     const [photos, setPhotos] = useState([]);
+    const [error, setError] = useState(null);  // 에러 상태 추가
     const navigate = useNavigate();
     const { wardId } = useParams();
 
     useEffect(() => {
-        if (!patientId) return;
+        if (!patientId) return;  // patientId가 없으면 데이터 요청을 하지 않음
 
         const fetchPhotos = async () => {
             try {
@@ -39,15 +40,23 @@ const TimeLine = ({ patientId }) => {
                     credentials: 'include',
                 });
 
-                const sortedPhotos = response.data.sort((a, b) => new Date(b.upload_time) - new Date(a.upload_time));
-                setPhotos(sortedPhotos);
+                if (response.data.length === 0) {
+                    setError('사진이 없습니다.');  // 사진이 없을 때 에러 메시지 표시
+                    setPhotos([]);  // 빈 배열로 초기화
+                } else {
+                    const sortedPhotos = response.data.sort((a, b) => new Date(b.upload_time) - new Date(a.upload_time));
+                    setPhotos(sortedPhotos);
+                    setError(null);  // 에러 메시지 초기화
+                }
             } catch (error) {
                 console.error('Error fetching photos:', error);
+                setError('사진이 없습니다.');  // 오류 메시지 설정
+                setPhotos([]);  // 에러 발생 시 빈 배열로 초기화
             }
         };
 
         fetchPhotos();
-    }, [patientId]);
+    }, [patientId]);  // patientId가 변경될 때마다 새로 요청을 보냄
 
     // 사진 삭제 함수
     const deletePhoto = async (photoId) => {
@@ -81,7 +90,9 @@ const TimeLine = ({ patientId }) => {
     return (
         <TimelineContainer>
             <PhotoList>
-                {photos && photos.length > 0 ? (
+                {error ? (
+                    <PhotoText>{error}</PhotoText>  // error 메시지가 있을 경우 표시
+                ) : photos && photos.length > 0 ? (
                     photos.map((photo) => (
                         <PhotoCard key={photo.id}>
                             <PhotoImage src={photo.photo} alt="Patient Timeline" />
@@ -102,7 +113,6 @@ const TimeLine = ({ patientId }) => {
             </PhotoList>
         </TimelineContainer>
     );
-    
 };
 
 export default TimeLine;

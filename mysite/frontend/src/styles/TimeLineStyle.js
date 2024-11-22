@@ -107,7 +107,7 @@ export const ButtonMeta = styled.div`
 `;
 
 export const Button = styled.button`
-  display: flex;
+
   justify-content: space-evenly;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 

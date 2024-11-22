@@ -152,10 +152,23 @@ class PatientPhotosAPI(generics.ListCreateAPIView):
     def get_queryset(self):
         patient_id = self.kwargs['patient_id']
         # Patient가 존재하는지 확인
-        if not Patient.objects.filter(id=patient_id).exists():
-            raise NotFound(f"ID {patient_id}에 해당하는 환자를 찾을 수 없습니다.")
-        
-        return Photo.objects.filter(patient_id=patient_id)
+        try:
+            queryset = Photo.objects.filter(patient_id=patient_id)
+            print(f"Retrieved QuerySet: {queryset}")  # 디버깅 로그
+            return queryset
+        except Exception as e:
+            print(f"Error in get_queryset: {e}")
+            return Photo.objects.none()  # 빈 QuerySet 반환
+    
+    def list(self, request, *args, **kwargs):
+        patient_id = self.kwargs['patient_id']
+        queryset = self.get_queryset()
+        print(f"Queryset: {queryset}")  # Debugging 용 로그
+
+        if not queryset.exists():
+            print(f"No photos found for patient {patient_id}")
+            return Response([], status=status.HTTP_200_OK)  # 빈 배열 반환
+        return super().list(request, *args, **kwargs)
 
     def perform_create(self, serializer):
         patient_id = self.kwargs['patient_id']
@@ -165,12 +178,7 @@ class PatientPhotosAPI(generics.ListCreateAPIView):
             raise NotFound(f"ID {patient_id}에 해당하는 환자를 찾을 수 없습니다.")
         serializer.save(patient=patient)
 
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        if not queryset.exists():
-            return Response([])  # 빈 배열 반환
-        return super().list(request, *args, **kwargs)
-
+    
 # 사진 업로드 API
 class PhotoCreateAPI(generics.CreateAPIView):
     serializer_class = PhotoSerializer
