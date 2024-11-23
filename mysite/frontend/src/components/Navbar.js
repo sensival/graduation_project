@@ -37,7 +37,7 @@ const Navbar = () => {
     <Nav>
       <Logo to="/">Kardex Gallery</Logo>
       <Menu>
-        <NavItem to="/" exact>Home</NavItem>
+        <NavItem to="/home" exact>Home</NavItem>
         <NavItem to="/select-ward">병동선택</NavItem>
         <NavItem to="/list">리스트보기</NavItem>
         <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton> {/* 버튼으로 설정 */}
@@ -74,6 +74,7 @@ const Logo = styled(Link)`
   font-size: 1.5em;
   color: white;
   text-decoration: none;
+  font-family: 'Elice_bold';
 
   @media (max-width: 768px) {
     font-size: 1.2em; /* 모바일에서 폰트 크기 조정 */
@@ -84,7 +85,7 @@ const Logo = styled(Link)`
 const Menu = styled.div`
   display: flex;
   gap: 1em;
-
+  font-family: 'Gmarket_Medium';
   @media (max-width: 768px) {
     gap: 0.5em;
     align-items: center;
@@ -129,6 +130,7 @@ const NavItem = styled(NavLink)`
 `;
 
 const LogoutButton = styled.button`
+  font-family: 'Gmarket_Medium';
   background: none;
   border: none;
   color: white;

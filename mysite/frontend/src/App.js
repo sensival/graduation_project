@@ -10,6 +10,7 @@ import PatientList from './components/PatientList';
 import ListAndPicture from './pages/ListAndPicture';
 import PhotoUpload from './pages/PhotoUpload';
 import UpdatePhoto from './pages/UpdatePhoto'; 
+import AboutUsPage from './pages/AboutUsPage'; 
 import { UsernameProvider } from './components/UsernameContext';
 import { REACT_APP_HOST_IP_ADDRESS } from './env.js';
 
@@ -43,6 +44,7 @@ function App() {
           <Route path="/" element={<ExternalRedirect url={`${REACT_APP_HOST_IP_ADDRESS}gallery/login/`}/>}/>
           <Route path="/select-ward" element={<SelectWard />} />
           {/* 환자 목록 페이지 */}
+          <Route path="/home" element={<AboutUsPage />} />
           <Route path="/list/:wardId" element={<ListAndPicture />} />
           <Route path="/patients/:patientId/upload" element={<PhotoUpload  username={username} />} />
           <Route path="/patients/:patientId/update" element={<UpdatePhoto username={username} />} /> {/* UpdatePhoto 페이지로 수정 */}

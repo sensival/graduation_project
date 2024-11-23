@@ -9,6 +9,10 @@ export const WardContainer = styled.div`
   min-height: 100vh;
   padding: 7vh 0 5vh 0;
 
+h3{
+  font-family: 'Elice_bold';
+}
+
 
 
  /* ul과 li 스타일 추가 */
@@ -102,6 +106,8 @@ div.blank {
 }
 
 button.add {
+
+font-family: 'Elice_bold';
   background-color: white;
   color: #9e82d8;
   padding: 1em;
@@ -109,6 +115,8 @@ button.add {
   border-radius: 20px;
   font-size: 1.1em;
   cursor: pointer;
+  
+
   transition: background-color 0.3s ease;
 }
 
