@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -165,6 +166,10 @@ ALLOWED_HOSTS = [
     '*',              # 모든 호스트를 허용 (보안에 주의!)
 ]
 
+# Render에서 제공하는 포트 번호 사용
+PORT = os.getenv("PORT", 8000)
+
+
 
 # 세션 만료 시간 설정 (예: 2주)
 SESSION_COOKIE_AGE = 1209600  # 2주 동안 세션 유지
@@ -172,3 +177,6 @@ SESSION_COOKIE_AGE = 1209600  # 2주 동안 세션 유지
 
 # settings.py
 LOGOUT_REDIRECT_URL = 'http://192.168.0.5:3000/login'
+
+
+SECRET_KEY = config('SECRET_KEY', default='fallback-secret-key')
