@@ -20,6 +20,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 print(STATICFILES_DIRS)
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+
  # 클라이언트가 접근하는 URL 경로
 MEDIA_ROOT = os.path.join(BASE_DIR, 'patient_photos')
 print("MEDIA ROOT:",MEDIA_ROOT)
