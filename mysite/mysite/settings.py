@@ -23,6 +23,7 @@ print(STATICFILES_DIRS)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
 
  # 클라이언트가 접근하는 URL 경로
+MEDIA_URL = '/media/' 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'patient_photos')
 print("MEDIA ROOT:",MEDIA_ROOT)
 
