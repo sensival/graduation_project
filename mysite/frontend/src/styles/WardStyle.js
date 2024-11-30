@@ -106,8 +106,7 @@ div.blank {
 }
 
 button.add {
-
-font-family: 'Elice_bold';
+ font-family: 'Elice_bold';
   background-color: white;
   color: #9e82d8;
   padding: 1em;
