@@ -38,7 +38,7 @@ class CustomLoginView(LoginView):
 
         # 리디렉션 시 username을 쿼리 파라미터로 전달
         print(f"Redirecting to: http://192.168.0.5:3000/select-ward?username={usr_name}")
-        return HttpResponseRedirect(f'graduation-project-nu-ashy.vercel.app/select-ward?username={usr_name}')
+        return HttpResponseRedirect(f'https://graduation-project-nu-ashy.vercel.app/select-ward?username={usr_name}')
     
     def form_invalid(self, form):
         # 로그인 실패 시 메시지 추가
@@ -48,7 +48,7 @@ class CustomLoginView(LoginView):
 
     def get_success_url(self):
         # 로그인 성공 후 React 앱의 /select-ward 페이지로 리디렉트
-        return 'graduation-project-nu-ashy.vercel.app/select-ward'
+        return 'https://graduation-project-nu-ashy.vercel.app/select-ward'
 
 ########### 가입 ################
 def signup_view(request):
