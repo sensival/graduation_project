@@ -157,8 +157,8 @@ LOGIN_REDIRECT_URL = '192.168.0.5:3000/select_ward/'   # 로그인 후 병동 �
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # React 앱이 호스팅되는 주소
     "http://192.168.0.5:3000",  # 모바일 네트워크에서 접근하는 IP 주소
-    "https://graduation-project-22a6.onrender.com"
-    "https://graduation-project-nu-ashy.vercel.app"
+    "https://graduation-project-22a6.onrender.com",
+    "https://graduation-project-nu-ashy.vercel.app",
 ]
 
 CORS_ALLOW_CREDENTIALS = True 
