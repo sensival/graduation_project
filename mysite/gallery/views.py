@@ -64,37 +64,13 @@ def signup_view(request):
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
 
-# 로그아웃 API
+######## 로그아웃 API ################
 class LogoutView(APIView):
     def post(self, request):
         logout(request)
         return Response({"message": "Logged out successfully"}, status=status.HTTP_200_OK)
 
-# 로그인 API
-# class CustomLoginAPI(APIView):
-#     permission_classes = [AllowAny] 
-#     def post(self, request):
-#         username = request.data.get("username")
-#         password = request.data.get("password")
-#         user = authenticate(request, username=username, password=password)
-#         if user:
-#             login(request, user)
-#             serializer = UserSerializer(user)
-#             return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response({"error": "Invalid credentials"}, status=status.HTTP_400_BAD_REQUEST)
-
-# # 회원가입 API
-# class SignUpAPI(generics.CreateAPIView):
-#     permission_classes = [AllowAny] 
-#     queryset = User.objects.all()
-#     serializer_class = UserSerializer
-
-#     def post(self, request, *args, **kwargs):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         user = serializer.save()
-#         login(request, user)
-#         return Response(serializer.data, status=status.HTTP_201_CREATED)
+##################################################################################
 
 # 병동 목록 API
 class WardListAPI(generics.ListAPIView):
@@ -194,17 +170,7 @@ class PhotoCreateAPI(generics.CreateAPIView):
             uploaded_by=username,  # username 저장
             patient_id=patient_id  # patient_id 저장
         )
-# class PhotoCreateAPI(generics.CreateAPIView):
-#     serializer_class = PhotoSerializer
-#     permission_classes =  [AllowAny] 
 
-#     def perform_create(self, serializer):
-#         # URL에서 patient_id를 가져옵니다.
-#         patient_id = self.kwargs['patient_id']
-#         serializer.save(
-#             uploaded_by=self.request.user,
-#             patient_id=patient_id  # Photo 모델에 patient 필드가 있어야 함
-#         )
 
 
 # 개별 사진에 대해 조회(Retrieve), 수정(Update), 삭제(Delete) 기능 제공.
